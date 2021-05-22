@@ -20,6 +20,8 @@ namespace _4PD
     /// </summary>
     public partial class MainWindow : Window
     {
+        private User loggedInUser = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,52 +29,69 @@ namespace _4PD
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-
+            collapseGrids();
+            gridRegister.Visibility = Visibility.Visible;
+            clearTextBoxes();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            collapseGrids();
+            gridLogin.Visibility = Visibility.Visible;
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
-
+            loggedInUser = null;
+            collapseGrids();
+            btnLogout.Visibility = Visibility.Collapsed;
+            btnLogin.Visibility = Visibility.Visible;
+            btnRegister.Visibility = Visibility.Visible;
+            clearTextBoxes();
         }
 
         private void btnLoginLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            collapseGrids();
+            gridLoggedIn.Visibility = Visibility.Visible;
+            btnLogin.Visibility = Visibility.Collapsed;
+            btnRegister.Visibility = Visibility.Collapsed;
+            btnLogout.Visibility = Visibility.Visible;
         }
 
         private void btnRegisterRegister_Click(object sender, RoutedEventArgs e)
         {
-
+            collapseGrids();
         }
 
         private void btnAddPassword_Click(object sender, RoutedEventArgs e)
         {
-
+            collapseGrids();
+            gridAddPassword.Visibility = Visibility.Visible;
         }
 
         private void btnGeneratePassword_Click(object sender, RoutedEventArgs e)
         {
-
+            tbxGenerated.Visibility = Visibility.Visible;
         }
 
         private void tbxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            updatePasswordList(tbxSearch.Text);
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            collapseGrids();
+            gridLoggedIn.Visibility = Visibility.Visible;
+            clearTextBoxes();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            collapseGrids();
+            gridLoggedIn.Visibility = Visibility.Visible;
+            clearTextBoxes();
         }
 
         //-------------------------------------------------------------------------------------
@@ -83,7 +102,6 @@ namespace _4PD
             gridRegister.Visibility = Visibility.Collapsed;
             gridAddPassword.Visibility = Visibility.Collapsed;
             gridLoggedIn.Visibility = Visibility.Collapsed;
-            tbxGenerated.Visibility = Visibility.Collapsed;
         }
 
         private void clearTextBoxes()
@@ -98,11 +116,12 @@ namespace _4PD
             tbxURL.Text = "";
             tbxComment.Text = "";
             tbxSearch.Text = "";
+            tbxGenerated.Visibility = Visibility.Collapsed;
         }
 
         //-------------------------------------------------------------------------------------
 
-        private void updatePasswordList()
+        private void updatePasswordList(string name)
         {
 
         }
