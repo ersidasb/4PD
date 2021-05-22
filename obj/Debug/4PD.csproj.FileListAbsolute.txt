@@ -13,3 +13,5 @@ C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug
 C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.csproj.CoreCompileInputs.cache
 C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.exe
 C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.pdb
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\passwordControl.g.cs
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\passwordControl.baml

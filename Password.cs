@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _4PD
 {
-    class Password
+    public class Password
     {
         public string passName { get; set; }
         public string pass { get; set; }
