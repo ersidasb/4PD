@@ -24,5 +24,87 @@ namespace _4PD
         {
             InitializeComponent();
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLoginLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRegisterRegister_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddPassword_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnGeneratePassword_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //-------------------------------------------------------------------------------------
+
+        private void collapseGrids()
+        {
+            gridLogin.Visibility = Visibility.Collapsed;
+            gridRegister.Visibility = Visibility.Collapsed;
+            gridAddPassword.Visibility = Visibility.Collapsed;
+            gridLoggedIn.Visibility = Visibility.Collapsed;
+            tbxGenerated.Visibility = Visibility.Collapsed;
+        }
+
+        private void clearTextBoxes()
+        {
+            tbxRegisterPassword.Text = "";
+            tbxRegisterUsername.Text = "";
+            tbxLoginPassword.Text = "";
+            tbxLoginUsername.Text = "";
+            tbxGenerated.Text = "";
+            tbxName.Text = "";
+            tbxPassword.Text = "";
+            tbxURL.Text = "";
+            tbxComment.Text = "";
+            tbxSearch.Text = "";
+        }
+
+        //-------------------------------------------------------------------------------------
+
+        private void updatePasswordList()
+        {
+
+        }
     }
 }

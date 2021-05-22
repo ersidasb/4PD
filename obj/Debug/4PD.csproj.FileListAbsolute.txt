@@ -1,0 +1,15 @@
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\bin\Debug\4PD.exe.config
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\bin\Debug\4PD.exe
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\bin\Debug\4PD.pdb
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.csprojAssemblyReference.cache
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\MainWindow.g.cs
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\App.g.cs
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD_MarkupCompile.cache
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD_MarkupCompile.lref
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\MainWindow.baml
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.g.resources
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\_4PD.Properties.Resources.resources
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.csproj.GenerateResource.cache
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.csproj.CoreCompileInputs.cache
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.exe
+C:\Users\ersid\Desktop\Kolegijai\2 kursas\2 semestras\saugumas\4PD\4PD\obj\Debug\4PD.pdb
