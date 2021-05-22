@@ -21,17 +21,23 @@ namespace _4PD
     /// </summary>
     public partial class MainWindow : Window
     {
+        delegate void updateDelegate();
+        updateDelegate update;
+
         private Files files = new Files();
         private User loggedInUser = null;
         private string mainFilePath = @"data\users.txt";
 
         public MainWindow()
         {
+            this.Closing += Window_Closing;
             InitializeComponent();
             if (!File.Exists(mainFilePath))
             {
                 File.Create(mainFilePath);
             }
+            update = updatePasswordList;
+            passwordControl.update = update;
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -49,6 +55,7 @@ namespace _4PD
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
+            files.logOut(loggedInUser);
             loggedInUser = null;
             collapseGrids();
             btnLogout.Visibility = Visibility.Collapsed;
@@ -71,7 +78,7 @@ namespace _4PD
                 btnLogin.Visibility = Visibility.Collapsed;
                 btnRegister.Visibility = Visibility.Collapsed;
                 btnLogout.Visibility = Visibility.Visible;
-                updatePasswordList(loggedInUser.Username, "");
+                updatePasswordList();
             }
             catch (Exception exc)
             {
@@ -85,7 +92,7 @@ namespace _4PD
             {
                 if (tbxRegisterUsername.Text.Trim(' ') == "" || tbxRegisterPassword.Text.Trim(' ') == "")
                     throw new Exception("Please fill in required fields");
-                if (files.userExists(tbxRegisterUsername.Text))
+                if (files.userExists(tbxRegisterUsername.Text) || tbxRegisterUsername.Text == "users")
                     throw new Exception("Username is taken");
                 files.register(tbxRegisterUsername.Text, tbxRegisterPassword.Text);
                 collapseGrids();
@@ -123,7 +130,7 @@ namespace _4PD
 
         private void tbxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            updatePasswordList(tbxSearch.Text, tbxSearch.Text);
+            updatePasswordList();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -135,6 +142,7 @@ namespace _4PD
                 if (files.passwordNameExists(tbxName.Text, loggedInUser.Username))
                     throw new Exception("Password name already exists");
                 files.addPassword(loggedInUser, tbxName.Text, tbxPassword.Text, tbxURL.Text, tbxComment.Text);
+                updatePasswordList();
                 collapseGrids();
                 gridLoggedIn.Visibility = Visibility.Visible;
                 clearTextBoxes();
@@ -148,8 +156,8 @@ namespace _4PD
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             collapseGrids();
-            gridLoggedIn.Visibility = Visibility.Visible;
             clearTextBoxes();
+            gridLoggedIn.Visibility = Visibility.Visible;
         }
 
         //-------------------------------------------------------------------------------------
@@ -179,15 +187,15 @@ namespace _4PD
 
         //-------------------------------------------------------------------------------------
 
-        private void updatePasswordList(string name, string search)
+        private void updatePasswordList()
         {
             pnlPasswords.Children.Clear();
             List<Password> passwords =  files.getAllPasswords(loggedInUser.Username);
             foreach(Password p in passwords)
             {
-                if(search != "")
+                if(tbxSearch.Text != "")
                 {
-                    if(p.passName.Contains(search))
+                    if(p.passName.Contains(tbxSearch.Text))
                     {
                         passwordControl control = new passwordControl(p, loggedInUser);
                         pnlPasswords.Children.Add(control);
@@ -199,6 +207,11 @@ namespace _4PD
                     pnlPasswords.Children.Add(control);
                 }
             }
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (loggedInUser != null)
+                files.logOut(loggedInUser);
         }
     }
 }

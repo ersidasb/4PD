@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace _4PD
@@ -22,6 +20,8 @@ namespace _4PD
                     {
                         if(u.Password == crypto.CreateHash(password))
                         {
+                            crypto.initialize(u.Password);
+                            crypto.FileDecrypt(@"data\" + u.Username + ".txt");
                             return u;
                         }
                     }
@@ -35,12 +35,23 @@ namespace _4PD
             }
         }
 
+
+
+        public void logOut(User user)
+        {
+            crypto.initialize(user.Password);
+            crypto.FileEncrypt(@"data\" + user.Username + ".txt");
+        }
+
         public void register(string username, string password)
         {
             try
             {
                 File.AppendAllText(mainFilePath, username + "," + crypto.CreateHash(password) + Environment.NewLine);
-                File.Create(@"data\" + username + ".txt");
+                var file = File.Create(@"data\" + username + ".txt");
+                file.Close();
+                crypto.initialize(crypto.CreateHash(password));
+                crypto.FileEncrypt(@"data\" + username + ".txt");
             }
             catch(Exception exc)
             {
@@ -118,18 +129,19 @@ namespace _4PD
         {
             try
             {
-                File.Create(@"data\" + user.Username + ".txt");
                 List<Password> passwords = getAllPasswords(user.Username);
-                foreach(Password p in passwords)
+                var file = File.Create(@"data\" + user.Username + ".txt");
+                file.Close();
+                foreach (Password p in passwords)
                 {
                     if (p.passName == name)
                         p.pass = crypto.EncryptPassword(newPassword, user.Password);
-                    File.AppendAllText(@"data\" + user.Username + ".txt", p.passName + "," + p.pass + p.passURL + "," + p.comment + Environment.NewLine);
+                    File.AppendAllText(@"data\" + user.Username + ".txt", p.passName + "," + p.pass + "," + p.passURL + "," + p.comment + Environment.NewLine);
                 }
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageBox.Show("update password error: " + exc.Message);
             }
         }
     }

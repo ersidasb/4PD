@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace _4PD
     class Crypto
     {
         private RijndaelManaged AES;
+        AesCryptoServiceProvider provider;
 
         public Crypto()
         {
@@ -20,87 +22,45 @@ namespace _4PD
             AES.Padding = PaddingMode.PKCS7;
             AES.Mode = CipherMode.CFB;
         }
-        private byte[] GenerateRandomSalt()
+
+        public void initialize(string keyString)
         {
-            byte[] data = new byte[32];
+            provider = new AesCryptoServiceProvider();
+            keyString = keyString.Length <= 16 ? keyString : keyString.Substring(0, 16);
+            if (keyString.Length < 16)
+                while (keyString.Length < 16)
+                    keyString += '0';
 
-            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-                for (int i = 0; i < 10; i++)
-                    rng.GetBytes(data);
-
-            return data;
+            provider.Mode = CipherMode.ECB;
+            provider.BlockSize = 128;
+            provider.KeySize = 128;
+            provider.Key = Encoding.Default.GetBytes(keyString);
+            provider.Padding = PaddingMode.PKCS7;
         }
 
-        public void FileEncrypt(string inputFile, string password)
+        public void FileEncrypt(String filePath)
         {
-            byte[] salt = GenerateRandomSalt();
-            FileStream fsCrypt = new FileStream(inputFile + ".aes", FileMode.Create);
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            byte[] fileContent = File.ReadAllBytes(filePath);
+            ICryptoTransform transform = provider.CreateEncryptor();
+            byte[] encrypted = transform.TransformFinalBlock(fileContent, 0, fileContent.Length);
+            File.WriteAllBytes(filePath, encrypted);
+        }
 
-            var key = new Rfc2898DeriveBytes(passwordBytes, salt, 50000);
-            AES.Key = key.GetBytes(AES.KeySize / 8);
-            AES.IV = key.GetBytes(AES.BlockSize / 8);
-
-            fsCrypt.Write(salt, 0, salt.Length);
-
-            CryptoStream cs = new CryptoStream(fsCrypt, AES.CreateEncryptor(), CryptoStreamMode.Write);
-            FileStream fsIn = new FileStream(inputFile, FileMode.Open);
-
-            byte[] buffer = new byte[1048576];
-            int read;
-
+        public void FileDecrypt(String filePath)
+        {
             try
             {
-                while ((read = fsIn.Read(buffer, 0, buffer.Length)) > 0)
-                    cs.Write(buffer, 0, read);
-
-                fsIn.Close();
+                byte[] encryptedFileContent = File.ReadAllBytes(filePath);
+                ICryptoTransform transform = provider.CreateDecryptor();
+                byte[] decrypted = transform.TransformFinalBlock(encryptedFileContent, 0, encryptedFileContent.Length);
+                File.WriteAllBytes(filePath, decrypted);
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
-                throw new Exception(e.Message);
-            }
-            finally
-            {
-                cs.Close();
-                fsCrypt.Close();
+                Console.Write("Error:" + exc.Message + "\nFile:" + filePath + "\n");
             }
         }
-        public void FileDecrypt(string inputFile, string outputFile, string password)
-        {
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-            byte[] salt = new byte[32];
-            FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
 
-            fsCrypt.Read(salt, 0, salt.Length);
-
-            var key = new Rfc2898DeriveBytes(passwordBytes, salt, 50000);
-            AES.Key = key.GetBytes(AES.KeySize / 8);
-            AES.IV = key.GetBytes(AES.BlockSize / 8);
-
-            CryptoStream cs = new CryptoStream(fsCrypt, AES.CreateDecryptor(), CryptoStreamMode.Read);
-            FileStream fsOut = new FileStream(outputFile, FileMode.Create);
-
-            int read;
-            byte[] buffer = new byte[1048576];
-
-            try
-            {
-                while ((read = cs.Read(buffer, 0, buffer.Length)) > 0)
-                    fsOut.Write(buffer, 0, read);
-
-                cs.Close();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            finally
-            {
-                fsOut.Close();
-                fsCrypt.Close();
-            }
-        }
 
         public string EncryptPassword(string textToEncrypt, string usrPassword)
         {

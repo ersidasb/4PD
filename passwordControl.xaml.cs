@@ -26,6 +26,7 @@ namespace _4PD
         int state = 0;
         Crypto crypto = new Crypto();
         Files files = new Files();
+        public static Delegate update { get; set; }
         public passwordControl(Password password, User user)
         {
             this.password = password;
@@ -61,7 +62,9 @@ namespace _4PD
         {
             btnShowHide.Visibility = Visibility.Collapsed;
             btnEdit.Visibility = Visibility.Collapsed;
+            btnCopy.Visibility = Visibility.Collapsed;
             btnSave.Visibility = Visibility.Visible;
+            tbxPassword.IsReadOnly = false;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -73,12 +76,32 @@ namespace _4PD
                 files.updatePassword(user, password.passName, tbxPassword.Text);
                 btnShowHide.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
+                btnCopy.Visibility = Visibility.Visible;
                 btnSave.Visibility = Visibility.Collapsed;
+                tbxPassword.IsReadOnly = true;
+                update.DynamicInvoke();
                 MessageBox.Show("Password was successfully updated");
             }
             catch(Exception exc)
             {
                 MessageBox.Show(exc.Message);
+            }
+        }
+
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(tbxPassword.Text);
+        }
+
+        private void tblURL_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(tblURL.Text);
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("Not a valid URL");
             }
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_4PD"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="passwords" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="btnRegister" Visibility="Visible" Content="Register" HorizontalAlignment="Left" Margin="610,23,0,0" VerticalAlignment="Top" Width="75" Click="btnRegister_Click"/>
         <Button x:Name="btnLogin" Visibility="Visible" Content="Login" HorizontalAlignment="Left" Margin="705,23,0,0" VerticalAlignment="Top" Width="75" Click="btnLogin_Click"/>
