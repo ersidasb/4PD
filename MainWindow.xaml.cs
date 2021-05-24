@@ -124,8 +124,7 @@ namespace _4PD
                 }
                 generated += (char)randomNumber;
             }
-            tbxGenerated.Text = generated;
-            tbxGenerated.Visibility = Visibility.Visible;
+            tbxPassword.Text = generated;
         }
 
         private void tbxSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -176,13 +175,11 @@ namespace _4PD
             tbxRegisterUsername.Text = "";
             tbxLoginPassword.Text = "";
             tbxLoginUsername.Text = "";
-            tbxGenerated.Text = "";
             tbxName.Text = "";
             tbxPassword.Text = "";
             tbxURL.Text = "";
             tbxComment.Text = "";
             tbxSearch.Text = "";
-            tbxGenerated.Visibility = Visibility.Collapsed;
         }
 
         //-------------------------------------------------------------------------------------

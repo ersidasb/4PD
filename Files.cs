@@ -59,6 +59,18 @@ namespace _4PD
             }
         }
 
+        public void deletePassword(string username, string passName)
+        {
+            List<Password> passwords = getAllPasswords(username);
+            var file = File.Create(@"data\" + username + ".txt");
+            file.Close();
+            passwords.RemoveAll(p => p.passName == passName);
+            foreach (Password p in passwords)
+            {
+                File.AppendAllText(@"data\" + username + ".txt", p.passName + "," + p.pass + "," + p.passURL + "," + p.comment + Environment.NewLine);
+            }
+        }
+
         //----------------------------------------------------------
 
         private List<User> getAllUsers()

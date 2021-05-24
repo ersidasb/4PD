@@ -104,5 +104,11 @@ namespace _4PD
                 MessageBox.Show("Not a valid URL");
             }
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            files.deletePassword(user.Username, password.passName);
+            update.DynamicInvoke();
+        }
     }
 }

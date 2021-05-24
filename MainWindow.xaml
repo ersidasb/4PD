@@ -30,9 +30,7 @@
         <Grid x:Name="gridLoggedIn" Visibility="Collapsed" HorizontalAlignment="Left" Height="355" Margin="10,55,0,0" VerticalAlignment="Top" Width="774">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search:" VerticalAlignment="Top"/>
             <TextBox x:Name="tbxSearch" HorizontalAlignment="Left" Height="23" Margin="53,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="524" TextChanged="tbxSearch_TextChanged"/>
-            <TextBox x:Name="tbxGenerated" Visibility="Collapsed" HorizontalAlignment="Left" Height="23" Margin="582,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" IsReadOnly="True"/>
             <Button x:Name="btnAddPassword" Content="Add password" HorizontalAlignment="Left" Margin="607,57,0,0" VerticalAlignment="Top" Width="135" Click="btnAddPassword_Click"/>
-            <Button x:Name="btnGeneratePassword" Content="Generate password" HorizontalAlignment="Left" Margin="607,93,0,0" VerticalAlignment="Top" Width="135" Click="btnGeneratePassword_Click"/>
             <ScrollViewer HorizontalAlignment="Left" Height="298" Margin="10,47,0,0" VerticalAlignment="Top" Width="567">
                 <StackPanel x:Name="pnlPasswords"/>
             </ScrollViewer>
@@ -49,6 +47,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="238,136,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="266,164,0,0" TextWrapping="Wrap" Text="URL:" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="235,192,0,0" TextWrapping="Wrap" Text="Comment:" VerticalAlignment="Top"/>
+            <Button x:Name="btnGeneratePassword" Content="Generate password" HorizontalAlignment="Left" Margin="500,133,0,0" VerticalAlignment="Top" Width="114" Click="btnGeneratePassword_Click"/>
         </Grid>
 
     </Grid>
